@@ -26,8 +26,7 @@ function calculateAll() {
   for (let i = 0; i < product.length; i++){
     totalcart += updateSubtotal(product[i]);
   }
-  console.log(totalcart)
-  
+    
   
   // ITERATION 3
   //... your code goes here
