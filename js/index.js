@@ -38,23 +38,42 @@ function calculateAll() {
 // ITERATION 4
 
 function removeProduct(event) {
-  const target = event.currentTarget;
+  const target = event.currentTarget.parentNode.parentNode;
+  const targetParent = target.parentNode;
+  targetParent.removeChild(target);
   console.log('The target in remove is:', target);
   //... your code goes here
-  let button = document.querySelectorAll('btn-remove');
-  button.addEventListener("click");
-
+  
 }
 
 // ITERATION 5
 
 function createProduct() {
+
   //... your code goes here
+  const newProductName = document.querySelectorAll('.create-product td input')[0].value;
+  const newProductPrice = document.querySelectorAll('.create-product td input')[1].value;
+  let parent = document.querySelector('.product');
+  let newProduct = parent.cloneNode(true);
+  let priceToChange = newProduct.querySelector('.price span');
+  let nameToChange = newProduct.querySelector('.name span');
+  priceToChange.innerText = newProductPrice;
+  nameToChange.innerText = newProductName;
+  const rmvButton = newProduct.querySelector ('.btn-remove');
+  rmvButton.addEventListener('click', removeProduct);
+  newTable = document.querySelector('tbody');
+  newTable.appendChild(newProduct);
 }
 
 window.addEventListener('load', () => {
   const calculatePricesBtn = document.getElementById('calculate');
   calculatePricesBtn.addEventListener('click', calculateAll);
-
+  
   //... your code goes here
+  const rmvButton = document.querySelectorAll('.btn-remove');
+  for (let i = 0; i < rmvButton.length; i++){
+    rmvButton[i].addEventListener('click', removeProduct);
+  }
+  const createButton = document.querySelector ('#create');
+  createButton.addEventListener('click', createProduct);
 });
